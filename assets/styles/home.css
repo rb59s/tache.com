@@ -1,0 +1,92 @@
+  body {
+        background: linear-gradient(135deg, #cce7ff, #66b3ff, #0066cc);
+}
+  main {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center;
+}
+.logo img {
+    width: 225px;
+    height: 225px;
+}
+
+.logo {
+    animation: logo1 1500ms, logo2 1500ms 2500ms infinite alternate;
+    margin: 0;
+}
+
+@keyframes logo1{
+    0%{translate: 0 -120vh;}
+    100%{translate: 0;}  
+}
+
+@keyframes logo2{
+    0%{translate: 0;}
+    100%{translate: 0 -8vh;}    
+}
+    h2 {
+        color: #007BFF;
+        text-align: center;
+        padding: 0 17vw;
+        justify-content: center;
+        font-size: clamp(20px, 1.75vw, 100px);
+}
+
+    .button {                              
+        display: flex; 
+        gap: 50px;
+        justify-content: center; 
+}
+
+.button input[type="button"]:nth-child(1) {
+    cursor: pointer; 
+    height: 150px;
+    width: 350px;
+    font-size: clamp(15px, 0.80vw, 80px);
+    border: none; 
+    margin: 0%;
+    animation: button1 1500ms;
+    font-family: "Police3", serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+     background: linear-gradient(135deg, #cce7ff, #66b3ff, #0066cc);
+    border-radius: 8px
+}
+
+.button input[type="button"]:nth-child(2) {
+    cursor: pointer; 
+    height: 150px;
+    width: 350px;
+    font-size: clamp(15px, 0.80vw, 80px);
+    border: none; 
+    margin: 0%;
+    animation: button2 1500ms;
+    font-family: "Police3", serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+     background: linear-gradient(135deg, #cce7ff, #66b3ff, #0066cc);
+    border-radius: 8px;
+}
+.button input[type="button"]:nth-child(1):hover {
+    transform: scale(1.1);          
+    transition: transform 0.3s; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);     
+}
+
+.button input[type="button"]:nth-child(2):hover {
+    transform: scale(1.1);          
+    transition: transform 0.3s;   
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);   
+}
+
+@keyframes button1 {
+    0%{translate: -120vw;}
+    100%{translate: 0;}  
+}
+
+@keyframes button2{
+    0%{translate: 120vw;}
+    100%{translate: 0;}    
+} 

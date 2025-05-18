@@ -1,0 +1,37 @@
+ body {
+        background: linear-gradient(135deg, #cce7ff, #66b3ff, #0066cc);
+}
+  main {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center;
+}
+ form {
+    max-width: 400px;
+    margin: auto;
+}
+ input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+ button {
+    padding: 10px;
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+ button:hover {
+    background-color: #0056b3;
+}
+
+form {
+    margin: 1%;
+    
+}
