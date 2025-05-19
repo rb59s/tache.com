@@ -12,7 +12,7 @@
   
     <form action="/connexion" method="post">
 
-      <?php setCSRF(1); ?>
+      <?php setCSRF(2); ?>
 
       <label for="email">Email</label>
       <input type="email" name="email" id="email" required>

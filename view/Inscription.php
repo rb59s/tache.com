@@ -10,7 +10,7 @@
   <h2>Créer un compte</h2>
 
   <form action="/inscription" method="POST">
-    <?php setCSRF(1); ?>
+    <?php setCSRF(3); ?>
   <label for="prenom">Prenom</label>
   <input type="text" name="prenom" id="prenom" placeholder="Prenom" required>
   <span class="error"><?php echo $error["prenom"]??"";?></span>

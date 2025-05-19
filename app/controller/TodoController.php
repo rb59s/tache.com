@@ -13,9 +13,14 @@ function todo()
 
 function createTask() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['description'])) {
+        if (!isCSRFValid()) {
+            echo "Le formulaire a expiré ou est invalide. Veuillez réessayer.";
+            return;
+        }
+
         $description = trim($_POST['description']);
-        $id_users = $_SESSION['idUser']; 
-        
+        $id_users = $_SESSION['idUser'];
+
         if (!empty($description) && isset($id_users)) {
             if (addTask($description, $id_users)) {
                 header('Location: /tasks');
@@ -31,7 +36,6 @@ function createTask() {
     }
 }
 
-
 function Tasks()
 {
     shouldBeLogged(true, "/connexion");
@@ -43,7 +47,6 @@ function Tasks()
 }
 
 function taskAction() {
-
     shouldBeLogged(true, "/connexion");
 
 
@@ -65,4 +68,14 @@ function taskAction() {
         echo "Requête invalide.";
         exit;
     }
+}
+
+function taskDone()
+{
+    shouldBeLogged(true, "/connexion");
+
+    $userId = $_SESSION['idUser'];
+    $completedTasks = getCompletedTasks($userId);
+
+    require_once __DIR__ . '/../../view/tasks_done.php';
 }

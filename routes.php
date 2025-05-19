@@ -46,8 +46,13 @@ const ROUTES = [
     'fonction' => 'Tasks'
     ],
     
-    '/taskAction'=>[
+    'taskAction'=>[
     'controller' => 'TodoController.php',
     'fonction' => 'taskAction'
+    ],
+
+    'task_done'=>[
+    'controller' => 'TodoController.php',
+    'fonction' => 'taskDone'
     ],
 ];
