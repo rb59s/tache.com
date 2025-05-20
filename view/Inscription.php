@@ -35,7 +35,7 @@
         <br>
 
         <label for="passwordbis">Passwordbis</label>
-        <input type="passwordbis" name="passwordBis" id="passwordBis" placeholder="Confirm password" required>
+        <input type="password" name="passwordBis" id="passwordBis" placeholder="Confirm password" required>
         <span class="error"><?php echo $error["passwordBis"] ?? ""; ?></span>
         <br>
 
