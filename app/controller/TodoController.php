@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../services/shouldBeLogged.php';
 require __DIR__ . '/../../services/Csrf.php';
-require __DIR__ . '/../Todo.php';
+require __DIR__ . '/../model/Todo.php';
 
 
 function todo()

@@ -1,9 +1,11 @@
 <?php
 require __DIR__ . '/../../services/cleanData.php';
 require __DIR__ . '/../../services/shouldBeLogged.php';
+require __DIR__ . '/../../services/capcha.php';
 require __DIR__ . '/../../services/Csrf.php';
 require __DIR__ . '/../../services/BruteForce.php';
-require __DIR__ . '/../Auth.php';
+require __DIR__ . '/../model/Auth.php';
+require __DIR__ . "/../../vendor/autoload.php";
 
 function home()
 {
@@ -24,54 +26,57 @@ function createUser() {
         if (!isCSRFValid()) {
         $error["csrf"] = "Le formulaire a expiré ou est invalide. Veuillez réessayer."; } 
         else {
-
+            $captchaResult = verifyCaptcha($_POST['g-recaptcha-response'] ?? null, $_SERVER['REMOTE_ADDR']);
+                if (!$captchaResult['success']) {
+                $error['captcha'] = $captchaResult['message'];
+            }
             
-            if (empty($_POST["prenom"])) {
-                $error["prenom"] = "Veuillez saisir votre prénom";
-            } else {
-                $prenom = cleanData($_POST["prenom"]);
-                if (!preg_match("/^[a-zA-Z' -]{2,25}$/", $prenom)) {
-                    $error["prenom"] = "Veuillez saisir un prénom valide";
-                }
-            }
-
-            if (empty($_POST["nom"])) {
-                $error["nom"] = "Veuillez saisir votre nom";
-            } else {
-                $nom = cleanData($_POST["nom"]);
-                if (!preg_match("/^[a-zA-Z' -]{2,25}$/", $nom)) {
-                    $error["nom"] = "Veuillez saisir un nom valide";
-                }
-            }
-
-            if (empty($_POST["email"])) {
-                $error["email"] = "Veuillez saisir une adresse email";
-            } else {
-                $email = cleanData($_POST["email"]);
-                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $error["email"] = "Veuillez saisir une adresse email valide";
+                if (empty($_POST["prenom"])) {
+                    $error["prenom"] = "Veuillez saisir votre prénom";
+                } else {
+                    $prenom = cleanData($_POST["prenom"]);
+                    if (!preg_match("/^[a-zA-Z' -]{2,25}$/", $prenom)) {
+                        $error["prenom"] = "Veuillez saisir un prénom valide";
+                    }
                 }
 
-                $resultat = getOneUserByEmail($email);
-                if ($resultat) {
-                    $error["email"] = "Cette adresse email est déjà utilisée";
+                if (empty($_POST["nom"])) {
+                    $error["nom"] = "Veuillez saisir votre nom";
+                } else {
+                    $nom = cleanData($_POST["nom"]);
+                    if (!preg_match("/^[a-zA-Z' -]{2,25}$/", $nom)) {
+                        $error["nom"] = "Veuillez saisir un nom valide";
+                    }
                 }
-            }
 
-            $password = $_POST["password"];
-            $passwordBis = $_POST["passwordBis"];
+                if (empty($_POST["email"])) {
+                    $error["email"] = "Veuillez saisir une adresse email";
+                } else {
+                    $email = cleanData($_POST["email"]);
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $error["email"] = "Veuillez saisir une adresse email valide";
+                    }
 
-            if (empty($password)) {
-                $error["password"] = "Veuillez saisir un mot de passe";
-            } elseif (!preg_match($regexPass, $password)) {
-                $error["password"] = "Veuillez saisir un mot de passe valide (minimum 6 caractères, avec un chiffre, une majuscule, et un caractère spécial)";
-            }
+                    $resultat = getOneUserByEmail($email);
+                    if ($resultat) {
+                        $error["email"] = "Cette adresse email est déjà utilisée";
+                    }
+                }
 
-            if (empty($passwordBis)) {
-                $error["passwordBis"] = "Veuillez saisir à nouveau votre mot de passe";
-            } elseif ($passwordBis !== $password) {
-                $error["passwordBis"] = "Les mots de passe ne correspondent pas";
-            }
+                $password = $_POST["password"];
+                $passwordBis = $_POST["passwordBis"];
+
+                if (empty($password)) {
+                    $error["password"] = "Veuillez saisir un mot de passe";
+                } elseif (!preg_match($regexPass, $password)) {
+                    $error["password"] = "Veuillez saisir un mot de passe valide (minimum 6 caractères, avec un chiffre, une majuscule, et un caractère spécial)";
+                }
+
+                if (empty($passwordBis)) {
+                    $error["passwordBis"] = "Veuillez saisir à nouveau votre mot de passe";
+                } elseif ($passwordBis !== $password) {
+                    $error["passwordBis"] = "Les mots de passe ne correspondent pas";
+                }
         }
 
         if (empty($error)) {

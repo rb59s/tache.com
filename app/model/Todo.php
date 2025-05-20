@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../config/pdo.php';
+require __DIR__ . '/../../config/pdo.php';
 
 function addTask($description, $id_users) {
     $pdo = connexionPDO();

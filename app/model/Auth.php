@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../config/pdo.php';
+require __DIR__ . '/../../config/pdo.php';
 function getOneUserByEmail(string $email): array|false
 {
     $pdo = connexionPDO();
