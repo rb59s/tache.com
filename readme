@@ -1,0 +1,64 @@
+                   Deploiment de Docker 
+
+Avec Docker, on déploie les conteneurs nécessaires pour l'application :
+un conteneur pour le serveur web, 
+un pour la base de données MySQL, et un pour PHPMyAdmin.
+Le tout est orchestré avec un fichier docker-compose.yml qui définit les services, les volumes,
+les ports et les configurations nécessaires pour que l'application fonctionne correctement
+de manière isolée et sécurisée. Pour lancer es conteneur on lance la commande docker-compose up -d
+
+                        Installation des dépendances PHP avec Composer
+Puis, sur le conteneur PHP, lancez composer require pour installer les bibliothèques utiles, notamment celles liées au CAPTCHA.
+
+
+
+
+                 Ma structure de fichier
+
+tache.com/
+├── app/                         # Contient la logique principale de l'application (modèle et contrôleurs)
+│   ├── model/                   # Classes représentant les données et la logique métier
+│   │   ├── Todo.php             # Modèle pour la gestion des tâches
+│   │   └── Auth.php             # Modèle pour la gestion des utilisateurs (authentification)
+│   └── controller/              # Gère les actions entre les vues et les modèles
+│       ├── AuthController.php   # Contrôleur pour les actions liées à l'authentification
+│       └── TodoController.php   # Contrôleur pour les actions liées aux tâches
+│
+├── asset/                       # Contient les fichiers statiques (CSS, JS)
+│   ├── javascript/              # Scripts JavaScript utilisés dans l'interface
+│   └── styles/                  # Feuilles de styles CSS
+│
+├── config/                      # Fichiers de configuration de la base de données
+│   ├── _blogConfig.php          # Paramètres de connexion (host, user, password…)
+│   └── pdo.php                  # Fonction de connexion à la BDD via PDO
+│
+├── database/                    # Fichiers SQL pour la structure de la base de données
+│   ├── bdd.sql                  # Script de création de la base de données
+│   └── tasks.sql                # Script de création de la table des tâches
+│
+├── services/                    # Fichiers utilitaires et services de sécurité
+│   ├── BruteForce.php           # Protection contre les tentatives de connexion répétées
+│   ├── capcha.php               # Vérification du reCAPTCHA
+│   ├── cleanData.php            # Nettoyage des données entrées par l'utilisateur
+│   ├── Csrf.php                 # Protection CSRF (jeton de sécurité)
+│   └── shouldBeLogged.php       # Vérifie si un utilisateur est connecté ou non
+│
+├── vendor/                      # Librairies tierces installées, notamment pour le CAPTCHA (générées par Composer)
+│
+├── view/                        # Fichiers de vues HTML affichés à l’utilisateur
+│   ├── 404.php                  # Page d’erreur pour les routes non trouvées
+│   ├── connexion.php            # Formulaire de connexion
+│   ├── inscription.php          # Formulaire d’inscription
+│   ├── home.php                 # Page d'accueil
+│   ├── todo-list.php            # Affichage de la liste de tâches
+│   ├── tasks.php                # Création et gestion des tâches
+│   ├── update.php               # Mise à jour d'une tâche
+│   └── tasks_done.php           # Affichage des tâches terminées
+│
+├── .gitignore                   # Fichiers à ignorer dans le versionnage Git
+├── .htaccess                    # Configuration Apache (réécriture d'URL, sécurité)
+├── Dockerfile                   # Image personnalisée pour le serveur web
+├── docker-compose.yml           # Déploiement des services (PHP, MySQL, phpMyAdmin)
+├── index.php                    # Point d’entrée de l’application (routeur)
+├── routes.php                   # Définition des routes de l'application
+└── README.md                    # Documentation du projet : description, installation, usage, 
