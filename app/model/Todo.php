@@ -1,12 +1,12 @@
 <?php
 require __DIR__ . '/../../config/pdo.php';
 
-function addTask($description, $id_users) {
+function addTask($title, $description, $id_users) {
     $pdo = connexionPDO();
     $sql = "INSERT INTO tasks (title, description, id_users) VALUES (:title, :description, :id_users)";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
-        'title' => $description,
+        'title' => $title,
         'description' => $description,
         'id_users' => $id_users
     ]);}

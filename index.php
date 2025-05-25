@@ -11,6 +11,10 @@ require __DIR__ . '/app/controller/' . ROUTES[$url]["controller"];
 }
 else
 {
-    require __DIR__ . '/view/404.php';
+    http_response_code(404);
+    echo "<h1>404 - Page non trouvée</h1>";
+    echo "<p>La page demandée n'existe pas.</p>";
 }
+
+
  

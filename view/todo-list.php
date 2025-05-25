@@ -18,9 +18,9 @@
         <img id="croix" src="../assets/close_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" aria-label="fermer le menu">
         <div class="link">
             <ul>
-                <li><a href="/todo" aria-label="rentrer vos taches">entrez tache</a></li>
+                <li><a href="/todo" aria-label="rentrer vos taches">entrer une tache</a></li>
                 <li><a href="/tasks" aria-label="taches deja faites">tache a faire </a></li>
-                <li><a href="/task_done" aria-label="aller vers la page contenant la localisation">tache faites</a></li>
+                <li><a href="/task_done" aria-label="aller vers la page contenant la localisation">tache faite</a></li>
             </ul>
         </div>
     </nav>

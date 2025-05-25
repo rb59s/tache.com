@@ -2,6 +2,7 @@
 require __DIR__ . '/../../services/shouldBeLogged.php';
 require __DIR__ . '/../../services/Csrf.php';
 require __DIR__ . '/../model/Todo.php';
+require __DIR__ . '/../../services/cleanData.php';
 
 
 function todo()
@@ -18,11 +19,12 @@ function createTask() {
             return;
         }
 
-        $description = trim($_POST['description']);
+        $title = cleanData($_POST['title']);
+        $description = cleanData($_POST['description']);
         $id_users = $_SESSION['idUser'];
 
         if (!empty($description) && isset($id_users)) {
-            if (addTask($description, $id_users)) {
+            if (addTask($title, $description, $id_users)) {
                 header('Location: /tasks');
                 exit;
             } else {

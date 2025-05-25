@@ -100,8 +100,8 @@ function login()
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
         
-        checkBruteForce($ip); 
         checktentative($ip); 
+        checkBruteForce($ip); 
 
         if (!isCSRFValid()) {
             $error["csrf"] = "Le formulaire a expiré ou est invalide. Veuillez réessayer.";
@@ -214,6 +214,7 @@ function logout()
 {
     $_SESSION = [];
     session_destroy(); 
+    setcookie("PHPSESSID", "", time() - 3600);
 
     header("Location: /");
     exit;
@@ -228,6 +229,7 @@ function deleteAccount() {
 
         if ($deleteid){
             session_destroy();
+            setcookie("PHPSESSID", "", time() - 3600);
             header("Location: /");
             exit;
         } else {

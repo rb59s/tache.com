@@ -1,9 +1,4 @@
 <?php
-/**
- * retourne une instance de connexion PDO à la BDD
- *
- * @return PDO
- */
 function connexionPDO(): \PDO{
 
 $config = require(__DIR__ . "/_blogConfig.php");
@@ -28,4 +23,4 @@ $config = require(__DIR__ . "/_blogConfig.php");
     }
 }
 
-?>
+
